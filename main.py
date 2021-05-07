@@ -62,7 +62,7 @@ class User(Resource):
 
 
 	def delete(self, user_id):
-		abort_if_id_dne(video_id)
+        #abort_if_id_dne(video_id)
 		collect.delete_one({"_id":user_id})
 		return '', 204
 
