@@ -6,9 +6,9 @@ client = pymongo.MongoClient("mongodb+srv://dbUser:cpen291@cluster0.02dfd.mongod
 db = client.test
 
 db = client["book-recommender"]
-collection = db["user-data"]
+collect = db["user-data"]
 
-db.collection.insert_one({"_id":0,
+collect.insert_one({"_id":0,
 "book 1 id": 1234,"book 1 rating": 4,
 "book 2 id": 5678,"book 2 rating": 2, 
 "book 3 id": 9101,"book 3 rating": 5,
