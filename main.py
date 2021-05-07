@@ -11,7 +11,7 @@ app.config["MONGO_DBNAME"] = 'bookuser-db'
 app.config["MONGO_URI"] = "mongodb+srv://dbUser:cpen291@cluster0.02dfd.mongodb.net/book-recommender?retryWrites=true&w=majority"
 api = Api(app)
 mongo = PyMongo(app)
-api.add_resource(User, "/user/<int:user_id>")
+
 
 client = pymongo.MongoClient("mongodb+srv://dbUser:cpen291@cluster0.02dfd.mongodb.net/book-recommender?retryWrites=true&w=majority")
 db = client["book-recommender"]
@@ -58,6 +58,7 @@ class User(Resource):
         #args should be a list of book id/rating tuples for a specific user
         #we gotta send it to backend/store it on the cloud/ use it to find similar user to initialize embedding model
         return {"entry": args}, 201
+api.add_resource(User, "/user/<int:user_id>")
 
 if __name__ == "__main__":
     app.run(debug=True)
