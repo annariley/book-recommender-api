@@ -60,11 +60,9 @@ class User(Resource):
         #we gotta send it to backend/store it on the cloud/ use it to find similar user to initialize embedding model
         return {"entry": args}, 201
 
-
-	def delete(self, user_id):
-        #abort_if_id_dne(video_id)
-		collect.delete_one({"_id":user_id})
-		return '', 204
+    def delete(self, user_id):
+        collect.delete_one({"_id": user_id})
+        return '', 204
 
 api.add_resource(User, "/user/<int:user_id>")
 
