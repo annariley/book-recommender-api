@@ -29,6 +29,7 @@ user_put_args.add_argument("book 4 id", type=int, help="book 4 id required", req
 user_put_args.add_argument("book 4 rating", type=int, help="book 4 rating required", required=True)
 user_put_args.add_argument("book 5 id", type=int, help="book 5 id required", required=True)
 user_put_args.add_argument("book 5 rating", type=int, help="book 5 rating required", required=True)
+user_put_args.add_argument("swipes", type=dict, help="dictionary of books swiped with sentiment")
 
 def abort_if_id_dne(user_id):
     if db.collect.find({"_id": user_id}).count()==0:
