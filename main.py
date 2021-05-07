@@ -29,7 +29,10 @@ user_put_args.add_argument("book 4 id", type=int, help="book 4 id required", req
 user_put_args.add_argument("book 4 rating", type=int, help="book 4 rating required", required=True)
 user_put_args.add_argument("book 5 id", type=int, help="book 5 id required", required=True)
 user_put_args.add_argument("book 5 rating", type=int, help="book 5 rating required", required=True)
-user_put_args.add_argument("swipes", type=dict, help="dictionary of books swiped with sentiment")
+
+user_update_args = reqparse.RequestParser()
+user_update_args.add_argument("book_id", type=int, help="Book id is required")
+user_update_args.add_argument("sentiment", type=str, help="swipe sentiment is required")
 
 def abort_if_id_dne(user_id):
     if db.collect.find({"_id": user_id}).count()==0:
@@ -46,7 +49,7 @@ class User(Resource):
         return {"user id": user_id, "recommended book id": 123}
 
     def put(self, user_id):
-        # check if user_id and args["_id"] are the same!!!!!!!!
+        # check if user_id and args["_id"] are the same!!!
         args = user_put_args.parse_args()
         print(args["_id"])
         abort_if_id_exists(args["_id"])
@@ -64,6 +67,18 @@ class User(Resource):
     def delete(self, user_id):
         collect.delete_one({"_id": user_id})
         return '', 204
+
+    
+    def patch(self, user_id):
+        abort_if_id_dne(user_id)
+		args = user_update_args.parse_args()
+        book_id = args["book_id"]
+        sentiment = args["sentiment"]
+		result = db.collect.findOne({"_id":user_id})
+        #if not result["swipes"]:
+
+
+		return result
 
 api.add_resource(User, "/user/<int:user_id>")
 
