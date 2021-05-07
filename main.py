@@ -11,11 +11,14 @@ app.config["MONGO_DBNAME"] = 'bookuser-db'
 app.config["MONGO_URI"] = "mongodb+srv://dbUser:cpen291@cluster0.02dfd.mongodb.net/book-recommender?retryWrites=true&w=majority"
 api = Api(app)
 mongo = PyMongo(app)
+api.add_resource(User, "/user/<int:user_id>")
 
 client = pymongo.MongoClient("mongodb+srv://dbUser:cpen291@cluster0.02dfd.mongodb.net/book-recommender?retryWrites=true&w=majority")
+db = client["book-recommender"]
+collect = db["user-data"]
 
 user_put_args = reqparse.RequestParser()
-user_put_args.add_argument("user id", type=int, help = "user id required", required=True)
+user_put_args.add_argument("_id", type=int, help = "user id required", required=True)
 user_put_args.add_argument("book 1 id", type=int, help="book 1 id required", required=True)
 user_put_args.add_argument("book 1 rating", type=int, help="book 1 rating required", required=True)
 user_put_args.add_argument("book 2 id", type=int, help="book 2 id required", required=True)
@@ -28,11 +31,11 @@ user_put_args.add_argument("book 5 id", type=int, help="book 5 id required", req
 user_put_args.add_argument("book 5 rating", type=int, help="book 5 rating required", required=True)
 
 def abort_if_id_dne(user_id):
-    if db.Collection.find({}).limit(1).size();:
+    if collect.find({"_id":user_id}).limit(1).size()==0:
         abort(404, message="Could not find user")
 
 def abort_if_id_exists(user_id):
-    if user_id in users:
+    if collect.find({"_id":user_id}).limit(1).size():
         abort(409, message="User already exists")
 
 class User(Resource):
@@ -41,10 +44,9 @@ class User(Resource):
         #get a book rec from back end and return the book id
         return {"user id": user_id, "recommended book id": 123}
 
-    def put(self):
+    def put(self, user_id):
+        # check if user_id and args["_id"] are the same!!!!!!!!
         args = user_put_args.parse_args()
-        db = client["book-recommender"]
-        collect = db["user-data"]
         abort_if_id_exists(args["user id"])
         collect.insert_one(args)
         #collect.insert_one({"_id":user_id,
