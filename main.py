@@ -31,11 +31,11 @@ user_put_args.add_argument("book 5 id", type=int, help="book 5 id required", req
 user_put_args.add_argument("book 5 rating", type=int, help="book 5 rating required", required=True)
 
 def abort_if_id_dne(user_id):
-    if ! db.collect.find({"_id": user_id}).limit(1):
+    if db.collect.find({"_id": user_id}).count()==0:
         abort(404, message="Could not find user")
 
 def abort_if_id_exists(user_id):
-    if db.collect.findOne({"_id":user_id}).size():
+    if db.collect.find({"_id": user_id}).count()>0:
         abort(409, message="User already exists")
 
 class User(Resource):
