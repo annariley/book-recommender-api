@@ -47,7 +47,8 @@ class User(Resource):
     def put(self, user_id):
         # check if user_id and args["_id"] are the same!!!!!!!!
         args = user_put_args.parse_args()
-        abort_if_id_exists(args["user id"])
+        print(args["_id"])
+        abort_if_id_exists(args["_id"])
         collect.insert_one(args)
         #collect.insert_one({"_id":user_id,
         #"book 1 id": args["book 1 id"],"book 1 rating": args["book 1 rating"],
