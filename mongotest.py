@@ -3,7 +3,7 @@ import pymongo
 from pymongo import MongoClient
 
 client = pymongo.MongoClient("mongodb+srv://dbUser:cpen291@cluster0.02dfd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-db = client.test
+#db = client.test
 
 db = client["book-recommender"]
 collect = db["user-data"]
