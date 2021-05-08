@@ -46,7 +46,11 @@ class User(Resource):
     def get(self, user_id):
         abort_if_id_dne(user_id)
         #get a book rec from back end and return the book id
-        return {"user id": user_id, "recommended book id": 123}
+        return jsonify(jsonify({"book id":1, "book title": "book one", "author name": "author one", "url":"url1"}), #just a template to remember the format to return
+        jsonify(jsonify({"book id":2, "book title": "book two", "author name": "author two", "url":"url2"})),
+        jsonify(jsonify({"book id":3, "book title": "book three", "author name": "author three", "url":"url3"})),
+        jsonify(jsonify({"book id":4, "book title": "book four", "author name": "author four", "url":"url4"})),
+        jsonify(jsonify({"book id":5, "book title": "book five", "author name": "author five", "url":"url5"})))
 
     def put(self, user_id):
         # check if user_id and args["_id"] are the same!!!
@@ -54,14 +58,7 @@ class User(Resource):
         print(args["_id"])
         abort_if_id_exists(args["_id"])
         collect.insert_one(args)
-        #collect.insert_one({"_id":user_id,
-        #"book 1 id": args["book 1 id"],"book 1 rating": args["book 1 rating"],
-        #"book 2 id": args["book 1 id"],"book 2 rating": args["book 1 rating"],
-        #"book 3 id": args["book 1 id"],"book 3 rating": args["book 1 rating"],
-        #"book 4 id": args["book 1 id"],"book 4 rating": args["book 1 rating"],
-        #"book 5 id": args["book 1 id"],"book 5 rating": args["book 1 rating"],})
-        #args should be a list of book id/rating tuples for a specific user
-        #we gotta send it to backend/store it on the cloud/ use it to find similar user to initialize embedding model
+        #args is a list of book id/rating tuples for a specific user
         return {"entry": args}, 201
 
     def delete(self, user_id):
@@ -76,7 +73,7 @@ class User(Resource):
         sentiment = args["sentiment"]
 		result = db.collect.findOne({"_id":user_id})
         #if not result["swipes"]:
-
+        #not done
 
 		return result
 
