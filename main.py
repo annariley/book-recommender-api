@@ -68,7 +68,6 @@ class User(Resource):
 
     
     def put(self, user_id):
-        abort_if_id_dne(user_id)
         args = user_update_args.parse_args()
         print(args["book_id"])
         print(args["sentiment"])
