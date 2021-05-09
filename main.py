@@ -69,12 +69,12 @@ class User(Resource):
     
     def patch(self, user_id):
         abort_if_id_dne(user_id)
-		args = user_update_args.parse_args()
+        args = user_update_args.parse_args()
         book_id = args["book_id"]
         sentiment = args["sentiment"]
         swipe_data = db["swipe-data"]
         swipe_data.insert_one({user_id:{book_id:sentiment}})
-		return {book_id:sentiment}
+        return {book_id:sentiment}
 
 api.add_resource(User, "/user/<int:user_id>")
 
