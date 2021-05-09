@@ -53,23 +53,25 @@ class User(Resource):
         jsonify(jsonify({"book id":4, "book title": "book four", "author name": "author four", "url":"url4"})),
         jsonify(jsonify({"book id":5, "book title": "book five", "author name": "author five", "url":"url5"})))
 
-    def put(self, user_id):
+    #def put(self, user_id):
         # check if user_id and args["_id"] are the same!!!
-        args = user_put_args.parse_args()
-        print(args["_id"])
-        abort_if_id_exists(args["_id"])
-        collect.insert_one(args)
+        #args = user_put_args.parse_args()
+        #print(args["_id"])
+        #abort_if_id_exists(args["_id"])
+        #collect.insert_one(args)
         #args is a list of book id/rating tuples for a specific user
-        return {"entry": args}, 201
+        #return {"entry": args}, 201
 
     def delete(self, user_id):
         collect.delete_one({"_id": user_id})
         return '', 204
 
     
-    def patch(self, user_id):
+    def put(self, user_id):
         abort_if_id_dne(user_id)
         args = user_update_args.parse_args()
+        print(args["book_id"])
+        print(args["sentiment"])
         book_id = args["book_id"]
         sentiment = args["sentiment"]
         swipe_data = db["swipe-data"]
