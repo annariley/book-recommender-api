@@ -75,7 +75,7 @@ class User(Resource):
         sentiment = args["sentiment"]
         swipe_data = db["swipe-data"]
         swipe_data.insert_one({str(user_id):(book_id, sentiment)})
-        return {book_id:sentiment}
+        return (book_id,sentiment)
 
 api.add_resource(User, "/user/<int:user_id>")
 
