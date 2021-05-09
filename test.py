@@ -9,8 +9,8 @@ BASE = "http://127.0.0.1:5000/"
 #"book 4 id": 4444,"book 4 rating": 1,
 #"book 5 id": 5555,"book 5 rating": 5})
 
-response = requests.patch(BASE + "user/" + "2", {"book_id":123,"sentiment":1})
-response = requests.patch(BASE + "user/" + "2", {"book_id":456,"sentiment":0})
+response = requests.put(BASE + "user/" + "2", {"book_id":123,"sentiment":1})
+response = requests.put(BASE + "user/" + "2", {"book_id":456,"sentiment":0})
 
 #resp1 = requests.delete(BASE + "user/" + "1")
 #resp2 = requests.delete(BASE + "user/" + "2")
