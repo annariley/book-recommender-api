@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'bookuser-db'
 app.config["MONGO_URI"] = "mongodb+srv://dbUser:cpen291@cluster0.02dfd.mongodb.net/book-recommender?retryWrites=true&w=majority"
 mongo = PyMongo(app)
-books = pd.read_csv('goodbooks.csv') 
+books = pd.read_csv('books.csv') 
 books_book_conv = {m : m-1 for m in self.books['book_id'] }
 books['book_id'] = self.books['book_id'].apply(lambda m: books_book_conv[m])
 books_dict = self.books.to_dict('book_data')
