@@ -18,7 +18,7 @@ books.drop(books.iloc[:, 1:7], inplace = True, axis = 1)
 books.drop(books.iloc[:, 2:4], inplace = True, axis = 1)
 books.drop(books.iloc[:, 3:13], inplace = True, axis = 1)
 books.drop(books.iloc[:, 4:], inplace = True, axis = 1)
-print(books.iloc[:,3:4])
+print(books.iloc[:,1:3])
 books_dict = books.to_dict('records')
 client = pymongo.MongoClient("mongodb+srv://dbUser:cpen291@cluster0.02dfd.mongodb.net/book-recommender?retryWrites=true&w=majority")
 db = client["book-recommender"]
