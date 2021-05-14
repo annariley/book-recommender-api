@@ -13,8 +13,9 @@ mongo = PyMongo(app)
 books = pd.read_csv('books.csv') 
 books_book_conv = {m : m-1 for m in books['book_id'] }
 books['book_id'] = books['book_id'].apply(lambda m: books_book_conv[m])
+print(books)
 books_dict = books.to_dict('records')
 client = pymongo.MongoClient("mongodb+srv://dbUser:cpen291@cluster0.02dfd.mongodb.net/book-recommender?retryWrites=true&w=majority")
 db = client["book-recommender"]
 book_collect = db["book-data"]
-book_collect.insert_many(books_dict, ordered=False)
+#book_collect.insert_many(books_dict, ordered=False)
